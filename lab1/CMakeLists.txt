@@ -1,7 +1,7 @@
 
 set(NAME lab1)
 
-include(../FindOpenCV.cmake)
+include(../cmake/findOpenCV.cmake)
 
 file(GLOB_RECURSE SOURCE_LIST ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
 
