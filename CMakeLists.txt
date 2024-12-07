@@ -17,6 +17,4 @@ set(CMAKE_CXX_FLAGS ${FLAGS})
 
 add_subdirectory(Lab1)
 
-add_executable(labs Main.cpp)
-target_link_libraries(${NAME} ${OPENCV_LIBS})
 

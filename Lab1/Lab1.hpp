@@ -25,12 +25,12 @@ public:
 	static constexpr auto kDegToRad			 = std::numbers::pi_v<float> / 180;
 	static constexpr auto kSinStart			 = 100;
 
-public:
+private:
 	VacuumCleanerAnimation(const VacuumCleanerAnimation &)			  = delete;
 	VacuumCleanerAnimation &operator=(const VacuumCleanerAnimation &) = delete;
 	VacuumCleanerAnimation(const std::string aVacuumCleaner, const std::string aBackground):
-		cleaner(cv::imread(resourcesPath / std::move(aVacuumCleaner))),
-		canvas(cv::imread(resourcesPath / std::move(aBackground)))
+		cleaner(cv::imread(resourcesPath / aVacuumCleaner)),
+		canvas(cv::imread(resourcesPath / aBackground))
 
 	{
 		cv::resize(canvas, canvas, cv::Size(1280, 720), 0, 0, cv::INTER_CUBIC);
@@ -44,13 +44,12 @@ public:
 		});
 		putSinusPoints();
 	}
-
-	static inline auto animate()
+public:
+	static inline void animate()
 	{
-		auto  animationThread = std::make_unique<std::thread>([] { 
-			VacuumCleanerAnimation animation("vacuum_cleaner_chopped.png", "white_background.jpg");
-			animation.emit(1); });
-		return animationThread;
+		VacuumCleanerAnimation animation("vacuum_cleaner_chopped.png", "white_background.jpg");
+		animation.emit(1);
+		cv::destroyAllWindows();
 	}
 
 private:
@@ -110,7 +109,7 @@ private:
 		aImage.copyTo(destRoi, mask);
 	}
 
-	void emit(int aDelay = 4)
+	void emit(int aDelay = 10)
 	{
 		auto cleanCanvas = canvas.clone();
 		for (size_t i = 0; i < sinPoints.size(); ++i) {
@@ -119,7 +118,7 @@ private:
 			auto rotated = getRotatedResizedImage(cleaner, angle, 3);
 			putRotatedImage(canvas, rotated, sinPoints[i]);
 			if (i == sinPoints.size() / 2)
-				cv::imwrite(resourcesPath / "animation_seredina.jpg", canvas);
+				cv::imwrite(resourcesPath / "middle.jpg", canvas);
 			cv::imshow("Animation", canvas);
 			if (cv::waitKey(aDelay) == Defines::kQuitKey)
 				break;
@@ -137,6 +136,10 @@ private:
 
 	std::array<cv::Point2f, kSampleRate> sinPoints;
 };
+
+
+
+
 
 }
 
