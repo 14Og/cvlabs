@@ -1,7 +1,8 @@
 #ifndef LAB1_LAB1
 #define LAB1_LAB1
 
-#include "core.hpp"
+#include "Core.hpp"
+#include "Defines.hpp"
 
 #include <array>
 #include <algorithm>
@@ -9,6 +10,13 @@
 #include <numbers>
 #include <utility>
 #include <filesystem>
+#include <thread>
+#include <memory>
+
+using Defines::resourcesPath;
+
+namespace Lab1 {
+
 class VacuumCleanerAnimation {
 
 public:
@@ -16,10 +24,6 @@ public:
 	static constexpr auto kRadToDeg			 = 180 / std::numbers::pi_v<float>;
 	static constexpr auto kDegToRad			 = std::numbers::pi_v<float> / 180;
 	static constexpr auto kSinStart			 = 100;
-	static constexpr auto kQuitSymbol		 = 'q';
-	static constexpr auto kResourcesPathname = "/home/og/coding/study/cv/labs/resources";
-
-	static inline std::filesystem::path resourcesPath{kResourcesPathname};
 
 public:
 	VacuumCleanerAnimation(const VacuumCleanerAnimation &)			  = delete;
@@ -41,20 +45,12 @@ public:
 		putSinusPoints();
 	}
 
-	void emit(int aDelay = 4)
+	static inline auto animate()
 	{
-		auto cleanCanvas = canvas.clone();
-		for (size_t i = 0; i < sinPoints.size(); ++i) {
-			canvas		 = cleanCanvas.clone();
-			auto angle	 = getTangentAngle(sinPoints[i]);
-			auto rotated = getRotatedResizedImage(cleaner, angle, 3);
-			putRotatedImage(canvas, rotated, sinPoints[i]);
-			if (i == sinPoints.size() / 2)
-				cv::imwrite(resourcesPath / "animation_seredina.jpg", canvas);
-			cv::imshow("Animation", canvas);
-			if (cv::waitKey(aDelay) == kQuitSymbol)
-				break;
-		}
+		auto  animationThread = std::make_unique<std::thread>([] { 
+			VacuumCleanerAnimation animation("vacuum_cleaner_chopped.png", "white_background.jpg");
+			animation.emit(1); });
+		return animationThread;
 	}
 
 private:
@@ -114,6 +110,22 @@ private:
 		aImage.copyTo(destRoi, mask);
 	}
 
+	void emit(int aDelay = 4)
+	{
+		auto cleanCanvas = canvas.clone();
+		for (size_t i = 0; i < sinPoints.size(); ++i) {
+			canvas		 = cleanCanvas.clone();
+			auto angle	 = getTangentAngle(sinPoints[i]);
+			auto rotated = getRotatedResizedImage(cleaner, angle, 3);
+			putRotatedImage(canvas, rotated, sinPoints[i]);
+			if (i == sinPoints.size() / 2)
+				cv::imwrite(resourcesPath / "animation_seredina.jpg", canvas);
+			cv::imshow("Animation", canvas);
+			if (cv::waitKey(aDelay) == Defines::kQuitKey)
+				break;
+		}
+	}
+
 private:
 	cv::Mat cleaner;
 	cv::Mat canvas;
@@ -126,12 +138,6 @@ private:
 	std::array<cv::Point2f, kSampleRate> sinPoints;
 };
 
-namespace lab1 {
-void animate()
-{
-	VacuumCleanerAnimation animation("vacuum_cleaner_chopped.png", "white_background.jpg");
-	animation.emit();
 }
-} // namespace lab1
 
 #endif /* LAB1_LAB1 */
