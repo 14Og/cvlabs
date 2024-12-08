@@ -8,7 +8,7 @@
 
 namespace ThreeBP {
 
-static constexpr auto kStep		   = 0.1;
+static constexpr auto kStep			   = 0.1;
 static constexpr auto kDistanceTresh   = 50;
 static constexpr auto kGravityConstant = 6.67430e4;
 static constexpr auto kFrames		   = 10000;
@@ -46,11 +46,11 @@ struct Body {
 };
 
 class RungeKutta4Runner {
-    static constexpr auto kX = 1280;
-    static constexpr auto kY = 720;
-	using Bodies	   = std::array<Body, 3>;
-	using BodiesPoints = std::array<cv::Point2f, 3>;
-	using Trajectories = std::array<std::vector<cv::Point2f>, 3>;
+	static constexpr auto kX = 1280;
+	static constexpr auto kY = 720;
+	using Bodies			 = std::array<Body, 3>;
+	using BodiesPoints		 = std::array<cv::Point2f, 3>;
+	using Trajectories		 = std::array<std::vector<cv::Point2f>, 3>;
 
 private:
 	RungeKutta4Runner()										= delete;
@@ -66,7 +66,7 @@ private:
 			// clang-format on
 		}
 	{
-        cv::resize(canvas, canvas, {kX, kY});
+		cv::resize(canvas, canvas, {kX, kY});
 	}
 
 public:
@@ -139,15 +139,18 @@ private:
 		}
 	}
 
-    void putPositionsText(int aFrameNum)
-    {
-        cv::putText(canvas, "Frame " + std::to_string(aFrameNum), {20,30}, cv::FONT_HERSHEY_SIMPLEX, 0.5, {0,0,0}, 1, cv::LINE_AA);
-        for (size_t i = 0; i < bodies.size(); ++i) {
-            std::string message;
-            message += "Body #" + std::to_string(i) + ": " + std::to_string(static_cast<int>(bodies[i].pos.x)) + ", " + std::to_string(static_cast<int>(bodies[i].pos.y));
-            cv::putText(canvas, message, {20, 30 + 30 * (static_cast<int>(i)+1)}, cv::FONT_HERSHEY_SIMPLEX, 0.5, {0,0,0}, 1, cv::LINE_AA);
-        }
-    }
+	void putPositionsText(int aFrameNum)
+	{
+		cv::putText(canvas, "Frame " + std::to_string(aFrameNum), {20, 30}, cv::FONT_HERSHEY_SIMPLEX, 0.5, {0, 0, 0}, 1,
+			cv::LINE_AA);
+		for (size_t i = 0; i < bodies.size(); ++i) {
+			std::string message;
+			message += "Body #" + std::to_string(i) + ": " + std::to_string(static_cast<int>(bodies[i].pos.x)) + ", "
+				+ std::to_string(static_cast<int>(bodies[i].pos.y));
+			cv::putText(canvas, message, {20, 30 + 30 * (static_cast<int>(i) + 1)}, cv::FONT_HERSHEY_SIMPLEX, 0.5,
+				{0, 0, 0}, 1, cv::LINE_AA);
+		}
+	}
 
 	void putTrajectories()
 	{
@@ -166,7 +169,7 @@ private:
 			}
 			step();
 			putBodies();
-            putPositionsText(frame);
+			putPositionsText(frame);
 			putTrajectories();
 			cv::imshow("Three Body Problem", canvas);
 			if (cv::waitKey(kDelayMs) == Defines::kQuitKey)

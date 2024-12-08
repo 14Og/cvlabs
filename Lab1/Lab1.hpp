@@ -20,17 +20,16 @@ namespace Lab1 {
 class VacuumCleanerAnimation {
 
 public:
-	static constexpr auto kSampleRate		 = 10000;
-	static constexpr auto kRadToDeg			 = 180 / std::numbers::pi_v<float>;
-	static constexpr auto kDegToRad			 = std::numbers::pi_v<float> / 180;
-	static constexpr auto kSinStart			 = 100;
+	static constexpr auto kSampleRate = 10000;
+	static constexpr auto kRadToDeg	  = 180 / std::numbers::pi_v<float>;
+	static constexpr auto kDegToRad	  = std::numbers::pi_v<float> / 180;
+	static constexpr auto kSinStart	  = 100;
 
 private:
 	VacuumCleanerAnimation(const VacuumCleanerAnimation &)			  = delete;
 	VacuumCleanerAnimation &operator=(const VacuumCleanerAnimation &) = delete;
 	VacuumCleanerAnimation(const std::string aVacuumCleaner, const std::string aBackground):
-		cleaner(cv::imread(resourcesPath / aVacuumCleaner)),
-		canvas(cv::imread(resourcesPath / aBackground))
+		cleaner(cv::imread(resourcesPath / aVacuumCleaner)), canvas(cv::imread(resourcesPath / aBackground))
 
 	{
 		cv::resize(canvas, canvas, cv::Size(1280, 720), 0, 0, cv::INTER_CUBIC);
@@ -44,6 +43,7 @@ private:
 		});
 		putSinusPoints();
 	}
+
 public:
 	static inline void animate()
 	{
@@ -137,10 +137,6 @@ private:
 	std::array<cv::Point2f, kSampleRate> sinPoints;
 };
 
-
-
-
-
-}
+} // namespace Lab1
 
 #endif /* LAB1_LAB1 */
