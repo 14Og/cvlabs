@@ -1,4 +1,4 @@
-find_package(OpenCV REQUIRED calib3d core imgproc highgui imgcodecs)
+find_package(OpenCV REQUIRED calib3d core imgproc highgui imgcodecs intensity_transform)
 
 if(OpenCV_FOUND)
     include_directories(${OpenCV_INCLUDE_DIRS})
