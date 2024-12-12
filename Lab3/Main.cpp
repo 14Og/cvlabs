@@ -13,13 +13,13 @@ int main(int, char **, char **)
     Lab3::RobotsFinder task3(Defines::resourcesPath / "Lab3" / "Task3");
     Lab3::WrenchChecker task4(Defines::resourcesPath / "Lab3" / "Task4");
 
-    // task1.findOnPhotos(Lab3::DisplayMode::SIMULTANEOUS);
-    // task1.findOnVideos(Lab3::DisplayMode::SUBSEQUENTIAL);
+    task1.findOnPhotos(Lab3::DisplayMode::SIMULTANEOUS);
+    task1.findOnVideos(Lab3::DisplayMode::SUBSEQUENTIAL);
 
-    // task2.findOnPhotos(Lab3::DisplayMode::SUBSEQUENTIAL);
+    task2.findOnPhotos(Lab3::DisplayMode::SUBSEQUENTIAL);
     
-    // task3.findOnPhotos(Lab3::DisplayMode::SUBSEQUENTIAL);
-    // task3.findOnVideos(Lab3::DisplayMode::SUBSEQUENTIAL);
+    task3.findOnPhotos(Lab3::DisplayMode::SUBSEQUENTIAL);
+    task3.findOnVideos(Lab3::DisplayMode::SUBSEQUENTIAL);
 
     task4.ckeckContours();
 

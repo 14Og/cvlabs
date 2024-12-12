@@ -4,7 +4,7 @@
 #include <filesystem>
 
 namespace Defines {
-    static constexpr auto kResourcesPathname{"/home/kolya/code/study/cv/cvlabs/Media"};
+    static constexpr auto kResourcesPathname{"/home/og/coding/study/cv/labs/Media"};
     static constexpr auto kQuitKey {'q'};
     static inline std::filesystem::path resourcesPath(kResourcesPathname); 
 }

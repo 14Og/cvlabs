@@ -4,7 +4,7 @@ set -e
 
 if [ "$#" -ne 4 ]; then
 	echo "cut_video.sh [input_file] [output_file] [start_time] [end_time]"
-	echo "start_time and end_time: hh:mm:ss.ms"
+	echo "start_time: hh:mm:ss.ms end_time: hh:mm:ss.ms"
 	exit 1  
 fi
 
