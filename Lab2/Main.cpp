@@ -4,7 +4,6 @@
 
 #include "opencv2/intensity_transform.hpp"
 
-#include <chrono>
 
 int main()
 {
