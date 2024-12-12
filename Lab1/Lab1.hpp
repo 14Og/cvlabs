@@ -29,8 +29,8 @@ private:
 	VacuumCleanerAnimation(const VacuumCleanerAnimation &)			  = delete;
 	VacuumCleanerAnimation &operator=(const VacuumCleanerAnimation &) = delete;
 	VacuumCleanerAnimation(const std::string aVacuumCleaner, const std::string aBackground):
-		cleaner(cv::imread(resourcesPath / aVacuumCleaner)),
-		canvas(cv::imread(resourcesPath / aBackground))
+		cleaner(cv::imread(resourcesPath / "Lab1" / aVacuumCleaner)),
+		canvas(cv::imread(resourcesPath / "Lab1" / aBackground))
 
 	{
 		cv::resize(canvas, canvas, cv::Size(1280, 720), 0, 0, cv::INTER_CUBIC);
@@ -118,7 +118,7 @@ private:
 			auto rotated = getRotatedResizedImage(cleaner, angle, 3);
 			putRotatedImage(canvas, rotated, sinPoints[i]);
 			if (i == sinPoints.size() / 2)
-				cv::imwrite(resourcesPath / "middle.jpg", canvas);
+				cv::imwrite(resourcesPath / "Lab2" / "Results" / "middle.jpg", canvas);
 			cv::imshow("Animation", canvas);
 			if (cv::waitKey(aDelay) == Defines::kQuitKey)
 				break;

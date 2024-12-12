@@ -8,7 +8,7 @@
 
 int main()
 {
-	auto sourceImage = cv::imread(Defines::resourcesPath / "220px-Lenna.png");
+	auto sourceImage = cv::imread(Defines::resourcesPath / "Lab2" / "220px-Lenna.png");
 	Lab2::Filters filters;
 
 	// Paragraphs 1 - 3: custom box filter vs cv::blur
@@ -91,17 +91,17 @@ int main()
 	}
 
 	// Saving all images
-	cv::imwrite(Defines::resourcesPath / "Lab2Results" / "customBoxFilter.png", customBoxFIlterImage);
-	cv::imwrite(Defines::resourcesPath / "Lab2Results" / "cvBlur.png", cvBlurImage);
-	cv::imwrite(Defines::resourcesPath / "Lab2Results" / "blurDiff.png", blurDiff);
-	cv::imwrite(Defines::resourcesPath / "Lab2Results" / "gaussianBlur.png", gaussianBlur);
-	cv::imwrite(Defines::resourcesPath / "Lab2Results" / "gaussDiff.png", gaussDiff);
-	cv::imwrite(Defines::resourcesPath / "Lab2Results" / "gaussLogDiff.png", gaussLogDiff);
-	cv::imwrite(Defines::resourcesPath / "Lab2Results" / "unsharpMaskBox.png", unsharpMaskBox);
-	cv::imwrite(Defines::resourcesPath / "Lab2Results" / "unsharpMaskGauss.png", unsharpMaskGauss);
-	cv::imwrite(Defines::resourcesPath / "Lab2Results" / "unsharpMaskDiff.png", unsharpMaskDiff);
-	cv::imwrite(Defines::resourcesPath / "Lab2Results" / "laplacianFilter.png", laplacianImage);
-	cv::imwrite(Defines::resourcesPath / "Lab2Results" / "unsharpMaskLaplacian.png", unsharpMaskLaplacian);
+	cv::imwrite(Defines::resourcesPath / "Lab2" / "Results" / "customBoxFilter.png", customBoxFIlterImage);
+	cv::imwrite(Defines::resourcesPath / "Lab2" / "Results" / "cvBlur.png", cvBlurImage);
+	cv::imwrite(Defines::resourcesPath / "Lab2" / "Results" / "blurDiff.png", blurDiff);
+	cv::imwrite(Defines::resourcesPath / "Lab2" / "Results" / "gaussianBlur.png", gaussianBlur);
+	cv::imwrite(Defines::resourcesPath / "Lab2" / "Results" / "gaussDiff.png", gaussDiff);
+	cv::imwrite(Defines::resourcesPath / "Lab2" / "Results" / "gaussLogDiff.png", gaussLogDiff);
+	cv::imwrite(Defines::resourcesPath / "Lab2" / "Results" / "unsharpMaskBox.png", unsharpMaskBox);
+	cv::imwrite(Defines::resourcesPath / "Lab2" / "Results" / "unsharpMaskGauss.png", unsharpMaskGauss);
+	cv::imwrite(Defines::resourcesPath / "Lab2" / "Results" / "unsharpMaskDiff.png", unsharpMaskDiff);
+	cv::imwrite(Defines::resourcesPath / "Lab2" / "Results" / "laplacianFilter.png", laplacianImage);
+	cv::imwrite(Defines::resourcesPath / "Lab2" / "Results" / "unsharpMaskLaplacian.png", unsharpMaskLaplacian);
 
 
 	return 0;

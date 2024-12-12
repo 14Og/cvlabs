@@ -1,5 +1,5 @@
 
-set(NAME Lab2)
+set(NAME Lab3)
 
 include(../cmake/findOpenCV.cmake)
 
