@@ -7,9 +7,8 @@
 
 namespace Lab2 {
 
-struct ExecTimeCounter {
-	template<typename Lambda>
-	ExecTimeCounter(Lambda &&aLambda, const std::string &aFunctionName)
+
+	void execTimeCounter(auto &&aLambda, const std::string &aFunctionName)
 	{
 		auto start = std::chrono::high_resolution_clock::now();
 		aLambda();
@@ -17,10 +16,7 @@ struct ExecTimeCounter {
 		auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 		std::cout << aFunctionName << "() execution time: " << duration.count() << " microseconds" << std::endl;
 	}
-	ExecTimeCounter(const ExecTimeCounter &)			= delete;
-	ExecTimeCounter &operator=(const ExecTimeCounter &) = delete;
 
-};
 
 }
 

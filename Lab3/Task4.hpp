@@ -12,6 +12,8 @@ using Contour  = std::vector<cv::Point>;
 using Contours = std::vector<Contour>;
 class ThreshHelper {
 
+	static constexpr auto kWindowName = "Contours";
+
 public:
 	ThreshHelper() = default;
 
@@ -44,15 +46,14 @@ private:
 		cv::drawContours(clone, contours, -1, {0, 0, 255}, 2);
 		cv::putText(clone, "Contours: " + std::to_string(contours.size()), {30, 30}, cv::FONT_HERSHEY_COMPLEX, 0.5,
 			{0, 0, 0}, 2);
-		cv::imshow("Contours", clone);
+		cv::imshow(kWindowName, clone);
 
-		// cv::imshow("Canny helper", workImage);
 	}
 
 	void setupCallbacks()
 	{
-		cv::createTrackbar("thresh", "Contours", &thresh, 255, onThreshChange, this);
-		cv::createTrackbar("max value", "Contours", &maxValue, 255, onMaxValueChange, this);
+		cv::createTrackbar("thresh", kWindowName, &thresh, 255, onThreshChange, this);
+		cv::createTrackbar("max value", kWindowName, &maxValue, 255, onMaxValueChange, this);
 	}
 
 	static inline void onThreshChange(int aVal, void *aSelf)

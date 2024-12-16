@@ -15,9 +15,9 @@ int main()
 	auto customBoxFIlterImage = cv::Mat(sourceImage.size(), sourceImage.type());
 	auto cvBlurImage		  = cv::Mat(sourceImage.size(), sourceImage.type());
 
-	Lab2::ExecTimeCounter(
+	Lab2::execTimeCounter(
 		[&]() { filters.customBoxFIlter(sourceImage, customBoxFIlterImage, {3, 3}); }, "customBoxFIlter");
-	Lab2::ExecTimeCounter([&]() { cv::blur(sourceImage, cvBlurImage, {3, 3}); }, "cv::blur");
+	Lab2::execTimeCounter([&]() { cv::blur(sourceImage, cvBlurImage, {3, 3}); }, "cv::blur");
 	auto [blurDiff, accuracy] = filters.calculateAccuracy(customBoxFIlterImage, cvBlurImage);
 	std::cout << "Accuracy: " << accuracy << std::endl;
 
