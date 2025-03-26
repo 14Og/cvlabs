@@ -20,5 +20,7 @@ set(CMAKE_CXX_FLAGS ${FLAGS})
 # add_subdirectory(Lab1)
 # add_subdirectory(Lab2)
 # add_subdirectory(Lab3)
-add_subdirectory(Lab4)
+# add_subdirectory(Lab4)
 
+# add_subdirectory(Lab6)
+add_subdirectory(Lab7)
