@@ -1,85 +1,69 @@
 #ifndef _LAB7_CURRENCY_CPP_
 #define _LAB7_CURRENCY_CPP_
 
-#include "ThinningAlgo.hpp"
 #include "Core.hpp"
 #include "Defines.hpp"
 
 #include <vector>
 #include <algorithm>
+#include <strstream>
+#include <array>
 
-void setGamma(const cv::Mat &Img, cv::Mat &Res, const double gamma)
-{
-	static cv::Mat gammaTable = cv::Mat::ones(1, 256, CV_8U);
-	static double gammaPrev			  = 1;
-
-	if (gamma != gammaPrev) {
-		auto p = gammaTable.ptr();
-		for (int i = 0; i < 256; ++i) {
-			p[i] = cv::saturate_cast<uchar>(pow(i / 255.0, gamma) * 255.0);
-		}
-		gammaPrev = gamma;
-	}
-
-	cv::LUT(Img, gammaTable, Res);
-}
-
-double getSaturate(cv::Mat src)
+double getSaturation(cv::Mat src)
 {
 	cv::Mat hsvImage;
 	cv::cvtColor(src, hsvImage, cv::COLOR_BGR2HSV);
 
-	cv::Mat channels[3];
-	split(hsvImage, channels);
+	// H, S, V
+	std::array<cv::Mat, 3> channels; 
+	cv::split(hsvImage, channels.data());
 
-	cv::Mat sat		   = channels[1];
-
-	cv::Scalar meanHue = mean(sat);
+	auto meanHue	= cv::mean(channels[1]);
 
 	return meanHue.val[0];
 }
 
 double saturateDistance(cv::Mat src, cv::Mat sample)
 {
-	double src_sat	  = getSaturate(src);
-	double sample_sat = getSaturate(sample);
+	auto src_sat	= getSaturation(src);
+	auto sample_sat = getSaturation(sample);
 	return std::abs(src_sat - sample_sat);
 }
 
 void performCurrency(cv::Mat &aImage, cv::Mat &aCopper, cv::Mat &aNickel)
 {
-	// cv::Mat img	   = cv::imread(std::string(SOURCE_DIR) + "/images/money/1.jpg");
-	// cv::Mat copper = cv::imread(std::string(SOURCE_DIR) + "/images/money/copper.jpg");
-	// cv::Mat nikel  = cv::imread(std::string(SOURCE_DIR) + "/images/money/nikel.jpg");
 
 	cv::Mat gray;
 	cv::cvtColor(aImage, gray, cv::COLOR_BGR2GRAY);
 
-	double absDist = saturateDistance(aCopper, aNickel);
+	auto absDist = saturateDistance(aCopper, aNickel);
 
 	std::vector<cv::Vec3f> circles;
 	cv::HoughCircles(gray, circles, cv::HOUGH_GRADIENT, 1, 20, 100, 30, 20, 50);
-	for (const auto &circle: circles) {
+	for (const auto &circle : circles) {
 		cv::Point center = cv::Point(circle[0], circle[1]);
 		int radius		 = circle[2];
 
 		cv::Rect roi(circle[0] - circle[2], circle[1] - circle[2], circle[2] * 2, circle[2] * 2);
-		cv::Mat img_roi		= aImage(roi);
+		cv::Mat img_roi		  = aImage(roi);
 
-		double copper_val	= saturateDistance(img_roi, aCopper);
-		double nik_per		= 100 * copper_val / absDist;
-		double cop_per		= 100 - nik_per;
+		auto copperValue	  = saturateDistance(img_roi, aCopper);
+		auto nickelPercentage = 100 * copperValue / absDist;
+		auto copPercentage	  = 100 - nickelPercentage;
 
-		std::string cop_str = std::format("La:{:.1f}", cop_per);
-		std::string nik_str = std::format("Ni:{:.1f}", nik_per);
+		auto copStr			  = std::to_string(copPercentage);
+		auto nickStr		  = std::to_string(nickelPercentage);
 
-		cv::circle(
-			aImage, center, radius, (cop_per > 80.0) ? cv::Scalar(255, 0, 0) : cv::Scalar(0, 255, 0), 3, cv::LINE_8);
-		cv::putText(aImage, cop_str, center + cv::Point(-30, 10), cv::FONT_HERSHEY_DUPLEX, 0.5, CV_RGB(0, 0, 0), 2);
-		cv::putText(aImage, nik_str, center + cv::Point(-30, -10), cv::FONT_HERSHEY_DUPLEX, 0.5, CV_RGB(0, 0, 0), 2);
+		copStr				  = copStr.substr(0, copStr.find('.') + 3);
+		nickStr				  = nickStr.substr(0, nickStr.find('.') + 3);
+
+		cv::circle(aImage, center, radius, (copPercentage > 80.0) ? cv::Scalar(255, 0, 0) : cv::Scalar(0, 255, 0), 3,
+			cv::LINE_8);
+		cv::putText(aImage, copStr, center + cv::Point(-30, 10), cv::FONT_HERSHEY_DUPLEX, 0.5, CV_RGB(0, 0, 0), 2);
+		cv::putText(aImage, nickStr, center + cv::Point(-30, -10), cv::FONT_HERSHEY_DUPLEX, 0.5, CV_RGB(0, 0, 0), 2);
 	}
 
-    cv::resize(aImage, aImage, aImage.size() * 2);
+	cv::resize(aImage, aImage, aImage.size() * 2);
 	cv::imshow("Money", aImage);
 
 	cv::waitKey();
@@ -89,11 +73,11 @@ int main(void)
 {
 	auto moneyPath = Defines::resourcesPath / "Lab7" / "Photo" / "Money";
 
-    auto image = cv::imread(moneyPath / "test.jpg");
-    auto copper = cv::imread(moneyPath / "copper_pattern.jpg");
-    auto nickel = cv::imread(moneyPath / "nickel_pattern.jpg");
+	auto image	   = cv::imread(moneyPath / "test.jpg");
+	auto copper	   = cv::imread(moneyPath / "copper_pattern.jpg");
+	auto nickel	   = cv::imread(moneyPath / "nickel_pattern.jpg");
 
-    performCurrency(image, copper, nickel);
+	performCurrency(image, copper, nickel);
 
 	cv::destroyAllWindows();
 }

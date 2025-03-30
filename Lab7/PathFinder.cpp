@@ -62,9 +62,9 @@ void findPathPhoto(cv::Mat &aImage)
 	}
 
 	auto firstPointIt = std::max_element(points.begin(), points.end(),
-		[](const cv::Point2i &aLhs, const cv::Point2i aRhs) { return cv::norm(aLhs) < cv::norm(aRhs); });
+		[](const cv::Point2i &aLhs, const cv::Point2i &aRhs) { return cv::norm(aLhs) < cv::norm(aRhs); });
 
-    std::iter_swap(firstPointIt, points.begin());  
+	std::iter_swap(firstPointIt, points.begin());
 
 	sortPath(points);
 
@@ -76,7 +76,6 @@ void findPathPhoto(cv::Mat &aImage)
 
 	cv::imshow("thinned path", thresh);
 	cv::imshow("path points", aImage);
-
 }
 
 void findPathVideo(cv::VideoCapture &aCap)
@@ -84,8 +83,8 @@ void findPathVideo(cv::VideoCapture &aCap)
 	cv::Mat image;
 	while (aCap.read(image)) {
 		findPathPhoto(image);
-        if (cv::waitKey(30) == Defines::kQuitKey)
-            break;
+		if (cv::waitKey(10) == Defines::kQuitKey)
+			break;
 	}
 	aCap.release();
 }
@@ -97,13 +96,12 @@ int main()
 
 	auto image	   = cv::imread(photoPath / "3.jpg", cv::IMREAD_ANYCOLOR);
 	findPathPhoto(image);
-    cv::waitKey();
+	cv::waitKey();
 
-	auto cap	   = cv::VideoCapture(videoPath / "2.avi");
+	auto cap = cv::VideoCapture(videoPath / "2.avi");
 	findPathVideo(cap);
 
-    cv::destroyAllWindows();
-
+	cv::destroyAllWindows();
 }
 
 #endif /* _LAB7_PATHFINDER_CPP_ */

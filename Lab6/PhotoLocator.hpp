@@ -96,14 +96,14 @@ protected:
 		return result;
 	}
 
-	void createGrid(cv::Mat &aImage, int aGridSize)
+	void createGrid(cv::Mat &aImage, int aGridStep)
 	{
-		int width  = aImage.cols;
-		int height = aImage.rows;
+		auto width  = aImage.cols;
+		auto height = aImage.rows;
 
 		cv::line(aImage, cv::Point(width / 2, 0), cv::Point(width / 2, height), cv::Scalar(255, 255, 255), 1);
 
-		for (int y = 0; y < height; y += aGridSize)
+		for (int y = 0; y < height; y += aGridStep)
 			cv::line(aImage, cv::Point(0, y), cv::Point(width, y), cv::Scalar(255, 255, 255), 1);
 	}
 };
