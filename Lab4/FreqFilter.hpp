@@ -1,7 +1,7 @@
 #ifndef LAB4_FREQFILTER
 #define LAB4_FREQFILTER
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 #include "Defines.hpp"
 #include "FTImpl.hpp"
 #include "Utils.hpp"

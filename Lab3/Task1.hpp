@@ -1,7 +1,7 @@
 #ifndef LAB3_TASK1
 #define LAB3_TASK1
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 #include "Base.hpp"
 #include "Defines.hpp"
 

@@ -1,7 +1,7 @@
 #ifndef LAB4_FTIMPL
 #define LAB4_FTIMPL
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 #include "Utils.hpp"
 
 #include <algorithm>

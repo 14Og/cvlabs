@@ -1,7 +1,7 @@
 #ifndef LAB4_UTILS
 #define LAB4_UTILS
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 
 #include <array>
 #include <iostream>

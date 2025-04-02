@@ -1,7 +1,7 @@
 #ifndef _LAB7_THINNINGALGO_HPP_
 #define _LAB7_THINNINGALGO_HPP_
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 
 #include <vector>
 #include <cstdint>

@@ -1,7 +1,7 @@
 #ifndef LAB2_FILTERS
 #define LAB2_FILTERS
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 
 #include <array>
 

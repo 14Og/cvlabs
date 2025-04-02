@@ -1,7 +1,7 @@
 #ifndef _LAB6_IMAGELOCATOR_HPP_
 #define _LAB6_IMAGELOCATOR_HPP_
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 #include "Defines.hpp"
 
 #include <algorithm>

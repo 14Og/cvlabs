@@ -1,7 +1,7 @@
 #ifndef LAB3_BASE
 #define LAB3_BASE
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 #include "Defines.hpp"
 
 #include <cstdint>

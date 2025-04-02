@@ -1,0 +1,20 @@
+%YAML:1.0
+---
+dateTime: "Wed Apr  2 12:51:12 2025"
+imageWidth: 1280
+imageHeight: 720
+samplesCount: 10
+cameraMatrix: !!opencv-matrix
+   rows: 3
+   cols: 3
+   dt: d
+   data: [ 1.0618551845504217e+03, 0., 6.2974180895798122e+02, 0.,
+       1.1283285646682887e+03, 3.6863359753468552e+02, 0., 0., 1. ]
+distortionCoefficients: !!opencv-matrix
+   rows: 1
+   cols: 5
+   dt: d
+   data: [ -3.5173791005613286e-01, 7.0558569269287785e-01,
+       8.9298645992568308e-03, -4.8637496193839813e-03,
+       1.2837257365051466e+01 ]
+totalReprojectionError: 1.2413881309169161e+00

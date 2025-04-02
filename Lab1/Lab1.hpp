@@ -1,7 +1,7 @@
 #ifndef LAB1_LAB1
 #define LAB1_LAB1
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 #include "Defines.hpp"
 
 #include <array>

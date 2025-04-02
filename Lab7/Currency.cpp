@@ -1,7 +1,7 @@
 #ifndef _LAB7_CURRENCY_CPP_
 #define _LAB7_CURRENCY_CPP_
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 #include "Defines.hpp"
 
 #include <vector>

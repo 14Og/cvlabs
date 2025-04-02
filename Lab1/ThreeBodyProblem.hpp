@@ -1,7 +1,7 @@
 #ifndef LAB1_NEWTHREEBODYPROBLEM
 #define LAB1_NEWTHREEBODYPROBLEM
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 
 #include <array>
 #include <string>

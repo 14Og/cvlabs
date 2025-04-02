@@ -1,7 +1,7 @@
 #ifndef LAB4_CONVOLUTION
 #define LAB4_CONVOLUTION
 
-#include "Core.hpp"
+#include "CoreHeaders.hpp"
 #include "Utils.hpp"
 #include "Defines.hpp"
 
